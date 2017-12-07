@@ -1,4 +1,4 @@
-# NODE CLASS AND CLASS SEARCH METHODS #
+# NODE CLASS AND SEARCH METHODS #
 
 class Node
   attr_accessor :value, :parent, :left, :right, :tree
@@ -16,8 +16,8 @@ class Node
     # empty (returns nil)
     queue = [self]
     
-    until queue[0].value == value || queue.empty?
-      left_child = queue[0].left
+    until queue.empty? || queue[0].value == value
+      left_child = queue[0].left 
       right_child = queue[0].right
       
       queue << left_child if left_child != nil
@@ -25,7 +25,7 @@ class Node
       queue.shift
     end
     
-    queue[0].value == value ? queue[0] : nil
+    queue.empty? ? nil : queue[0]
   end
 
 
@@ -40,7 +40,7 @@ class Node
       current_node = stack.last[0]
     
       if current_node.value == value 
-      return current_node
+        return current_node
       elsif stack_top[1] == false
         stack_top[1] = true 
         stack << [current_node.left, false, false] if current_node.left != nil
